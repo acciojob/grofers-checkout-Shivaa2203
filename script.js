@@ -1,39 +1,34 @@
 const getSumBtn = document.createElement("button");
-
-getSumBtn.innerText = "Get Total Price";
-
+getSumBtn.append("Get Total Price");
 document.body.appendChild(getSumBtn);
 
 const getSum = () => {
 
-    let oldRow = document.getElementById("total-row");
-
-    if (oldRow) {
-        oldRow.remove();
-    }
-
-    let prices = document.querySelectorAll(".prices");
+    let prices = document.querySelectorAll(".price");
 
     let total = 0;
 
     prices.forEach((item) => {
-        total += parseInt(item.innerText);
+        total += Number(item.textContent);
     });
+
+    // remove old result if exists
+    let old = document.getElementById("ans");
+    if (old) {
+        old.parentElement.remove();
+    }
 
     let table = document.querySelector("table");
 
     let tr = document.createElement("tr");
 
-    tr.id = "total-row";
-
     let td = document.createElement("td");
 
-    td.setAttribute("colspan", "2");
+    td.id = "ans";              
 
-    td.innerText = total;
+    td.textContent = total;
 
     tr.appendChild(td);
-
     table.appendChild(tr);
 };
 
