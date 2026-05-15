@@ -1,5 +1,5 @@
 const getSumBtn = document.createElement("button");
-getSumBtn.append("Get Total Price");
+getSumBtn.innerText = "Get Total Price";
 document.body.appendChild(getSumBtn);
 
 const getSum = () => {
@@ -9,24 +9,27 @@ const getSum = () => {
     let total = 0;
 
     prices.forEach((item) => {
-        total += Number(item.textContent);
+        total = total + Number(item.innerText.trim());
     });
 
-    // remove old result if exists
-    let old = document.getElementById("ans");
-    if (old) {
-        old.parentElement.remove();
+    let oldRow = document.getElementById("total-row");
+    if (oldRow) {
+        oldRow.remove();
     }
 
     let table = document.querySelector("table");
 
     let tr = document.createElement("tr");
 
+    tr.id = "total-row";
+
     let td = document.createElement("td");
 
-    td.id = "ans";              
+    td.id = "ans";   // VERY IMPORTANT
 
-    td.textContent = total;
+    td.colSpan = 2;
+
+    td.innerText = total;
 
     tr.appendChild(td);
     table.appendChild(tr);
